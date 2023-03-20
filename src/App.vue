@@ -1,9 +1,12 @@
 <template>
-  <nav>
-    <router-link to="/">Home23</router-link>
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <div class="header">
+      <img alt="Vue logo" src="@/assets/images/logo.png" class="logo" />
+    </div>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -13,17 +16,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  .header {
+    .logo {
+      width: 50px;
     }
+  }
+
+  .container {
+    padding: 20px;
   }
 }
 </style>

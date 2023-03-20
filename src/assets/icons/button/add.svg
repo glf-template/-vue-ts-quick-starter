@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="32" viewBox="0 0 30 32">
+  <g id="icon-add3" transform="translate(-371 -591.999)">
+    <rect id="Rectangle_36" data-name="Rectangle 36" width="30" height="32" transform="translate(371 591.999)" fill="none"/>
+    <g id="plus" transform="translate(374.352 596.058)">
+      <path id="Shape" d="M22.894,10.749h-9.88V1.117A1.116,1.116,0,0,0,11.9,0h0A1.116,1.116,0,0,0,10.78,1.117v9.632H1.117A1.116,1.116,0,0,0,0,11.866H0a1.116,1.116,0,0,0,1.117,1.117H10.78v9.663A1.116,1.116,0,0,0,11.9,23.763h0a1.116,1.116,0,0,0,1.117-1.117V12.983h9.88a1.116,1.116,0,0,0,1.117-1.117h0A1.116,1.116,0,0,0,22.894,10.749Z" transform="translate(0 0)"/>
+    </g>
+  </g>
+</svg>

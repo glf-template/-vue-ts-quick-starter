@@ -24,3 +24,9 @@ npm run build:test
 ```
 npm run build:prod
 ```
+
+
+
+## 项目开发
+### Icons
+项目用到的icon图标使用 `.svg` 后缀保存到 **src/assets/icons** 目录下，使用时直接用自定义组件 <ec-icon name="system-cdm" />的方式
