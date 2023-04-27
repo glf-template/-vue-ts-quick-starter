@@ -2,8 +2,6 @@ const path = require('path')
 const resolve = (...args) => path.resolve(__dirname, ...args)
 const { defineConfig } = require('@vue/cli-service')
 
-const ReleaseVersion = require('./package.json').version
-
 function getCurrentTime() {
   let date = new Date()
   let year = date.getFullYear()
@@ -20,6 +18,12 @@ function getCurrentTime() {
   return year + '-' + month + '-' + day + ' ' + h + ':' + m + ':' + s
 }
 const ReleaseTime = getCurrentTime()
+const ReleaseVersion = require('./package.json').version
+
+const Timestamp = new Date()
+  .getTime()
+  .toString()
+  .match(/.*(.{8})/)[1] // 截取时间戳后八位
 
 module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production' ? '/prod/' : './',
@@ -27,6 +31,7 @@ module.exports = defineConfig({
   lintOnSave: 'warning',
   transpileDependencies: true,
   devServer: {
+    open: true,
     port: '9021',
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -39,10 +44,33 @@ module.exports = defineConfig({
       }
     }
   },
+  configureWebpack: {
+    output: {
+      filename: `js/[name].${Timestamp}.js`,
+      chunkFilename: `js/[name].${Timestamp}.js`
+    },
+    module: {
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto'
+        }
+      ]
+    }
+  },
+  css: {
+    //重点.
+    extract: {
+      // 打包后css文件名称添加时间戳
+      filename: `css/[name].${Timestamp}.css`,
+      chunkFilename: `css/[name].${Timestamp}.css`
+    }
+  },
   chainWebpack: (config) => {
     // 修改或新增html-webpack-plugin的值
     config.plugin('html').tap((args) => {
-      args[0].title = process.env.VUE_APP_TITLE
+      args[0].title = 'vue-ts'
       args[0].releaseTime = ReleaseTime
       args[0].releaseVersion = ReleaseVersion
       return args
