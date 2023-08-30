@@ -20,11 +20,6 @@ function getCurrentTime() {
 const ReleaseTime = getCurrentTime()
 const ReleaseVersion = require('./package.json').version
 
-const Timestamp = new Date()
-  .getTime()
-  .toString()
-  .match(/.*(.{8})/)[1] // 截取时间戳后八位
-
 module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production' ? '/prod/' : './',
   assetsDir: 'assets',
@@ -46,8 +41,13 @@ module.exports = defineConfig({
   },
   configureWebpack: {
     output: {
-      filename: `js/[name].${Timestamp}.js`,
-      chunkFilename: `js/[name].${Timestamp}.js`
+      filename: `js/[name].[contenthash].js`,
+      chunkFilename: `js/[name].chunk-[contenthash].js`
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
     },
     module: {
       rules: [
@@ -63,8 +63,8 @@ module.exports = defineConfig({
     //重点.
     extract: {
       // 打包后css文件名称添加时间戳
-      filename: `css/[name].${Timestamp}.css`,
-      chunkFilename: `css/[name].${Timestamp}.css`
+      filename: `css/[name].[contenthash].css`,
+      chunkFilename: `css/[name].[contenthash].css`
     }
   },
   chainWebpack: (config) => {
